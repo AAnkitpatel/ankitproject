@@ -1,0 +1,56 @@
+Gmail_ postfix (centos)
+
+yum install cyrus-sasl-plain postfix mail* -y 
+vim /etc/postfix/main.cf
+
+myhostname = darwikdev.gmail.com
+relayhost = [smtp.gmail.com]:587
+smtp_use_tls = yes 
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+smtp_sasl_security_options = noanonymous
+smtp_sasl_tls_security_options = noanonymous
+
+vim /etc/postfix/sasl_passwd
+[smtp.gmail.com]:587  user@gmail.com:password
+
+chown root:postfix /etc/postfix/sasl_passwd
+chmod 640 /etc/postfix/sasl_passwd
+postmap /etc/postfix/sasl_passwd
+getenforce ; setenforce 0
+systemctl restart postfix
+
+echo "hello namrata" | mail -s "test demo mail by postfix " namratanigam0404@gmail.com
+
+
+@###################################################################################################################################
+
+
+Gmail_postfix (ubuntu)
+
+
+sudo apt-get update && sudo apt-get install postfix mailutils -y
+sudo  vi /etc/postfix/sasl_passwd
+"
+[smtp.gmail.com]:587  user@gmail.com:password
+"
+sudo chmod 600  /etc/postfix/sasl_passwd
+sudo vi /etc/postfix/main.cf
+
+"myhostname = user@gmail..com
+relayhost = [smtp.gmail.com]:587
+smtp_use_tls = yes 
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+smtp_sasl_security_options = noanonymous
+smtp_sasl_tls_security_options = noanonymous"
+
+sudo postmap /etc/postfix/sasl_passwd 
+systemctl restart postfix && systemctl enable postfix
+systemctl restart postfix
+systemctl enable postfix
+sudo systemctl enable postfix
+systemctl restart postfix
+echo "hello namrata" | mail -s "test demo mail by postfix " patelhaha007@gmail.com
