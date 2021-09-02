@@ -11,7 +11,7 @@ while true
 do
     echo "Time Now: `date +%D:+%H:%M:%S`"
     #output=$(nc -v -z -w 3 34.212.50.161 22 &> /dev/null && echo "Online" || echo "Offline")
-    for i in $sync_apf $sync_apf2 $sync_apf3 $default_sidekiq $sync_inventory_1 $sync_inventory $api_deploy $api_2_deploy $api_3_deploy $broadcast_to_yard $broadcast_to_yard_1 $broadcast_to_yard_2 $broadcast_to_yard_3 $cron_server_deploy $product_create_update $regenerate_cache $sidekiq 
+    for i in $sync $sync2 $sync3 $default_sidekiq $sync_inventory_1 $sync_inventory $api_deploy $api_2_deploy $api_3_deploy $broadcast_to_yard $broadcast_to_yard_1 $broadcast_to_yard_2 $broadcast_to_yard_3 $cron_server_deploy $product_create_update $regenerate_cache $sidekiq 
     do
     ip=$(echo $i | cut -d "=" -f1)
     instance_id=$(echo $i | cut -d "=" -f2)
@@ -19,7 +19,7 @@ do
     echo "$ip >>> $instance_id"
 #    sleep 5m
     echo "Time Now: `date +%D:+%H:%M:%S`"
-    timeout 20 ssh w3villa@$ip "uname -a" > /dev/null 2>&1  
+    timeout 20 ssh user@$ip "uname -a" > /dev/null 2>&1  
     if [ "$?" == "0"  ]
     then
 	    echo -e "$name >>$ip is fine\n"
