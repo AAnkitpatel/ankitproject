@@ -1,8 +1,8 @@
 #!/bin/bash
 
-user="w3villa"
+user="user"
 log_dir1="/var/www/html"
-main_log="/home/w3villa/app-path/current/log/"
+main_log="/home/user/app-path/current/log/"
 
 for i in  $prod $sync_ $sync_2 $sync__3 $sidekiq $staging $analytics
 do
