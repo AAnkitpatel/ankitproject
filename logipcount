@@ -1,0 +1,8 @@
+#!/bin/bash
+#count ip from logfile
+
+#Author: a.ankitpatel01@gmail.com
+#tested on: kali ubuntu centos
+
+file=./logfile
+cat $file| cut -d " " -f 1 | uniq -c|head -n 8 | awk '{print$2 "     " $1}' | sort -r -k2 
